@@ -20,4 +20,12 @@ def test_health_check(cliente):
     resposta = cliente.get("/saude")
     assert resposta.status_code == 200
 
-def test_s
+def test_soma_correta(cliente):
+    resposta = cliente.get("/soma/3/4")
+    dados = resposta.get_json()
+    assert dados["resultado"] == 7
+
+def test_soma_com_zero(cliente):
+    resposta = cliente.get("/soma/10/0")
+    dados = resposta.get_json()
+    assert dados["resultado"] == 10
